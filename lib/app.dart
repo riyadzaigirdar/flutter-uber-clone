@@ -1,5 +1,6 @@
+import 'package:uber/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:uber/screens/home/home.dart';
+import 'package:uber/routes.dart';
 
 class App extends StatelessWidget {
   @override
@@ -8,10 +9,14 @@ class App extends StatelessWidget {
       title: 'Uber',
       theme: ThemeData(
         fontFamily: "Ibm-Flex-Sans",
-        primarySwatch: Colors.red,
+        primarySwatch: colorCustom,
       ),
-      home: Home(),
+      onGenerateRoute: routes(),
+      initialRoute: LoginRoute,
       debugShowCheckedModeBanner: false,
     );
   }
+
+  
 }
+

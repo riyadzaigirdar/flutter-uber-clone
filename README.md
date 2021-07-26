@@ -1,16 +1,58 @@
-# uber
+# Add custom fonts
 
-A new Flutter project.
+    fonts:
+    - family: Signatra <-- Name you will use in your code fontfamily
+      fonts:
+        - asset: assets/fonts/Signatra.ttf <-- absolute path to fonts 
+    - family: Brand-Regular
+      fonts:
+        - asset: assets/fonts/bolt-regular.ttf
+    - family: Brand Bold
+      fonts:
+        - asset: assets/fonts/bolt-semibold.ttf
+    - family: Ibm-Flex-Sans
+      fonts:
+        - asset: assets/fonts/ibm-flex-sans.ttf
 
-## Getting Started
+# AssetImage Widget can be added if you wrap that in image widget
 
-This project is a starting point for a Flutter application.
+    Image(
+      image: AssetImage("path/to/image")
+    )
 
-A few resources to get you started if this is your first Flutter project:
+# primary swatch textfield er focus color change kore
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+    Map<int, Color> color = {
+      50: Colors.black,
+      100: Colors.black,
+      200: Colors.black,
+      300: Colors.black,
+      400: Colors.black,
+      500: Colors.black,
+      600: Colors.black,
+      700: Colors.black,
+      800: Colors.black,
+      900: Colors.black,
+      };
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+      MaterialColor colorCustom = MaterialColor(0xff123456, color);
+
+# Add Border Radius to elevated button
+
+    ElevatedButton(
+      onPressed: (){}, 
+      style: TextButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(20.0)
+        ),
+        backgroundColor: Colors.yellow,
+        padding: EdgeInsets.symmetric(horizontal: 170.0, vertical: 20.0)
+      ),
+      child: Text(
+                "Login",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold
+                ),
+              )
+    )

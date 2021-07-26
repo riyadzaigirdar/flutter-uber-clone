@@ -1,0 +1,11 @@
+{
+    "user": [
+      { 
+          "id": 1, 
+          "name": "riyad", 
+          "email": "riyad@kalke.co",
+          "phone": "01754130251",
+          "password": "123456" 
+    }
+    ]  
+  }
