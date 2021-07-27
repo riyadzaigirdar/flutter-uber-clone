@@ -10,6 +10,8 @@ RouteFactory routes() {
       print(settings);
     // var arguments =  settings.arguments;
     // final Map<String, dynamic> arguments = settings.arguments;
+    // final dynamic arguments = settings.arguments;
+    final Object? arguments = settings.arguments;
     Widget screen;
     switch (settings.name) {
       case LoginRoute:

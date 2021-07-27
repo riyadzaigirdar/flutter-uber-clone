@@ -1,3 +1,10 @@
+# app call
+  1. show loading showDialog -> Dialog
+  2. api call finished
+  3. remove loading dialog Navigator.pop(context)
+  4. navigator.pushNamedUntilRemoved()
+  5. show toast message Snackbar with a message
+
 # Add custom fonts
 
     fonts:

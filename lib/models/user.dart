@@ -4,7 +4,7 @@ import 'dart:convert';
 class User{
   final String name;
   final String email;
-  final int phone;
+  final String phone;
   final String password;
 
   const User({
@@ -13,6 +13,15 @@ class User{
     required this.phone,
     required this.password
   }); 
+
+ Object toJson(){
+   return {
+     "name": this.name,
+     "email": this.email,
+     "phone": this.phone,
+     "password": this.password,
+   };
+ }
 }
 
 Future<String> loginUserModel(String email, String password)async{
@@ -27,4 +36,14 @@ Future<String> loginUserModel(String email, String password)async{
     return "password didnt match";
   }
   return "No user found with that email";
+}
+
+Future<bool> createUser(String name, String email, String phone, String password) async{
+  final User user = User(name: name, email: email, phone: phone, password: password);
+  var url = 'http://localhost:3000/user/';
+  var res = await http.post(Uri.parse(url), body: user.toJson());
+  if(res.statusCode==201){
+    return true;
+  }
+  return false;
 }

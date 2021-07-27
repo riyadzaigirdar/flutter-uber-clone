@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uber/constants.dart';
+import 'package:uber/loading.dart';
 import 'package:uber/models/user.dart';
 import 'package:uber/routes.dart';
 import 'package:uber/toast.dart';
@@ -17,7 +18,16 @@ class _LoginState extends State<Login> {
   final TextEditingController _passwordController = TextEditingController();
 
   void loginUser(BuildContext context) async{
+    showDialog(
+      context: context, 
+      barrierDismissible: false,
+      builder: (BuildContext context)=>ProgressBar(msg: "Authenticating...")
+    );
     var message = await loginUserModel(_emailController.text, _passwordController.text);
+    await Future.delayed(Duration(milliseconds: 20000));
+    // remove loading
+    Navigator.pop(context);
+
     FocusScope.of(context).requestFocus(new FocusNode());
     successMessage(context, message);
     setState(() {

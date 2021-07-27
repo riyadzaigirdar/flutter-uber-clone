@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:uber/constants.dart';
+import 'package:uber/loading.dart';
+import 'package:uber/models/user.dart';
 import 'package:uber/routes.dart';
+import 'package:uber/toast.dart';
 
 class Register extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
@@ -27,9 +30,6 @@ class Register extends StatelessWidget {
                 key: _formKey,
                 child: Column(
                   children: [
-                    SizedBox(
-                     height: screenSize.height / 20.0
-                    ),
                     if(Navigator.of(context).canPop())
                     Row(
                       children: [
@@ -162,38 +162,30 @@ class Register extends StatelessWidget {
   }
 
   void registerUser(BuildContext context) async{
-    final user = true;
-    if(user){
+    showDialog(
+      context: context, 
+      barrierDismissible: false,
+      builder: (BuildContext context)=>ProgressBar(msg: "Registering...")
+    );
+    bool userCreated = await createUser(_nameController.text, _emailController.text, _phoneController.text, _passwordController.text);
+
+    if(userCreated){
       // user created
-      // show success message
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("User created successfully"),
-        duration: const Duration(seconds: 4),
-        backgroundColor: Colors.green,
-        // shape: RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.all(Radius.circular(50))),
-        action: SnackBarAction(
-          textColor: Colors.white,
-          label: 'X',
-          onPressed: () {},
-          ),
-        ));
+      await Future.delayed(Duration(milliseconds: 20000));
+      // remove loading
+      Navigator.pop(context);
+
       // navigate to login
       Navigator.pushNamedAndRemoveUntil(context, LoginRoute, (Route route) => false);
-    }else{
-      // something went wrong
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Something went wrong, try again later"),
-        duration: const Duration(seconds: 4),
-        backgroundColor: Colors.red,
-        // shape: RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.all(Radius.circular(50))),
-        action: SnackBarAction(
-          textColor: Colors.white,
-          label: 'X',
-          onPressed: () {},
-          ),
-        ));
+      
+      // show success message
+      successMessage(context, "Successfully created user");
+      }else{
+        // remove loading
+        Navigator.pop(context);
+
+        // something went wrong
+        errorMessage(context, "Something went wrong, try again later");
     }
   }
 }
