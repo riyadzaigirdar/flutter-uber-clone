@@ -150,6 +150,7 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return ElevatedButton(
       onPressed: (){
         if(formKey.currentState!.validate()){
@@ -157,12 +158,14 @@ class LoginButton extends StatelessWidget {
         } 
       }, 
       style: TextButton.styleFrom(
+        
         shape: RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(20.0)
         ),
         backgroundColor: Colors.yellow,
-        padding: EdgeInsets.symmetric(horizontal: 170.0, vertical: 17.0)
+        padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.39719, vertical: 17.0)
       ),
+      
       child: Text(
                 "Login",
                 style: TextStyle(

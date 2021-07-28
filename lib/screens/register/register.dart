@@ -253,9 +253,10 @@ class RegisterButton extends StatelessWidget {
     required this.press,
     required this.formKey
   });
-
+  
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return ElevatedButton(
       onPressed: (){
         if(formKey.currentState!.validate()){
@@ -267,7 +268,10 @@ class RegisterButton extends StatelessWidget {
           borderRadius: new BorderRadius.circular(20.0)
         ),
         backgroundColor: Colors.yellow,
-        padding: EdgeInsets.symmetric(horizontal: 155.0, vertical: 17.0)
+        padding: EdgeInsets.symmetric(
+          horizontal: screenSize.width * 0.3875, 
+          vertical: 17.0
+        )
       ),
       child: Text(
                 "Register",
